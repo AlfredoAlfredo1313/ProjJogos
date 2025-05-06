@@ -18,15 +18,11 @@ func animate_side():
 		
 func get_side_input():
 	velocity.x = 0
-	var vel := Input.get_axis("left", "right")
-	var jump := Input.is_action_just_pressed('ui_select')
-	
-	if is_on_floor() and jump:
-		velocity.y = jump_speed
-		get_tree().call_group("HUD", "update_score")
-		jump_sound.pitch_scale = randf_range(0.8,1.2)
-		jump_sound.play()
-	velocity.x = vel * speed
+	var vel : Vector2
+	vel.x = Input.get_axis("left", "right")
+	vel.y = Input.get_axis("up", "down")
+	velocity = vel.normalized() * speed
+	print(velocity.dot(velocity))
 	
 	if Input.is_action_just_pressed("click"):
 		print("Shoot")
@@ -35,7 +31,6 @@ func get_side_input():
 		owner.add_child(b)
 
 func move_side(delta):
-	velocity.y += gravity * delta
 	get_side_input()
 	animate_side()
 	move_and_slide()

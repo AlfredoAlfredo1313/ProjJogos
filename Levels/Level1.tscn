@@ -30,6 +30,7 @@ size = Vector2(2000, 20)
 
 [node name="AnimPlayer" parent="." groups=["Player"] instance=ExtResource("1_ysn8j")]
 position = Vector2(608, 407)
+motion_mode = 1
 bullet = ExtResource("2_6ll4n")
 
 [node name="Camera2D" type="Camera2D" parent="AnimPlayer"]
