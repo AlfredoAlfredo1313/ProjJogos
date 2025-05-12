@@ -6,7 +6,11 @@ extends CharacterBody2D
 
 @onready var sprite = $PlayerSprite
 @onready var jump_sound = $JumpSound
+@onready var basic_gun = $BasicGun as IGun
+@onready var lock_gun = $LockOnGun as IGun
+
 @export var bullet : PackedScene
+
 
 func animate_side():
 	if velocity.x > 0:
@@ -22,13 +26,12 @@ func get_side_input():
 	vel.x = Input.get_axis("left", "right")
 	vel.y = Input.get_axis("up", "down")
 	velocity = vel.normalized() * speed
-	print(velocity.dot(velocity))
 	
 	if Input.is_action_just_pressed("click"):
-		print("Shoot")
-		var b := bullet.instantiate()
-		b.position = global_position
-		owner.add_child(b)
+		basic_gun.shoot()
+		lock_gun.shoot()
+		
+		 
 
 func move_side(delta):
 	get_side_input()
@@ -62,10 +65,15 @@ func move_8way(delta):
 		velocity = velocity.bounce(collision_info.get_normal())
 		move_and_collide(velocity * delta * 10)
 	#move_and_slide()
+	
+func aim(delta):
+	var dir_pointer = get_viewport().get_mouse_position()
+	
 
 func _physics_process(delta):
 	# move_8way(delta)
 	move_side(delta)
+	aim(delta)
 	
 	#if position.y >= 1200:
 		#get_tree().change_scene_to_file("res://scenes/GameOver.tscn")

@@ -1,12 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://60okax2aajfx"]
+[gd_scene load_steps=13 format=3 uid="uid://60okax2aajfx"]
 
 [ext_resource type="PackedScene" uid="uid://d3equlu2k18pa" path="res://Player/AnimPlayer.tscn" id="1_ysn8j"]
 [ext_resource type="PackedScene" uid="uid://ciu6qrhn3f35e" path="res://Weapons/Bullet.tscn" id="2_6ll4n"]
-[ext_resource type="Texture2D" uid="uid://bp2dpdpn462oo" path="res://Sprites/grass1.png" id="3_kylad"]
 [ext_resource type="Texture2D" uid="uid://bj33xhy6d31ui" path="res://Sprites/grass2.png" id="4_bdlbp"]
 [ext_resource type="Texture2D" uid="uid://c8nmmod683v0t" path="res://Sprites/grass3.png" id="5_2h8qs"]
+[ext_resource type="PackedScene" uid="uid://bgkdd4vdlmf21" path="res://Player/Destructable.tscn" id="6_05pb0"]
 [ext_resource type="Texture2D" uid="uid://ty6hftqsqaoy" path="res://Sprites/grass4.png" id="6_rpty4"]
-[ext_resource type="Texture2D" uid="uid://14w11dhp3ddy" path="res://Sprites/grass5.png" id="7_6jj8j"]
+[ext_resource type="Shader" uid="uid://1wjb43dlttla" path="res://Player/HealthBar.gdshader" id="7_dl8mf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_glv2v"]
 size = Vector2(376, 42)
@@ -20,11 +20,11 @@ size = Vector2(192, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vvyt"]
 size = Vector2(94, 40)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c6i3y"]
-size = Vector2(38, 40)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhr70"]
-size = Vector2(2000, 20)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xcayt"]
+shader = ExtResource("7_dl8mf")
+shader_parameter/hp_per = 1.0
+shader_parameter/green = Vector3(0, 255, 0)
+shader_parameter/red = Vector3(255, 0, 0)
 
 [node name="Level1" type="Node2D"]
 
@@ -39,18 +39,21 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 editor_draw_drag_margin = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["Solid"]]
 position = Vector2(153, 294)
+collision_layer = 3
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-texture = ExtResource("3_kylad")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_glv2v")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+[node name="StaticBody2D2" type="StaticBody2D" parent="." groups=["Solid"]]
 position = Vector2(263, 458)
+collision_layer = 3
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
@@ -59,8 +62,10 @@ texture = ExtResource("4_bdlbp")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 shape = SubResource("RectangleShape2D_uu6xs")
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+[node name="StaticBody2D3" type="StaticBody2D" parent="." groups=["Solid"]]
 position = Vector2(619, 461)
+collision_layer = 3
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
@@ -69,8 +74,10 @@ texture = ExtResource("5_2h8qs")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
 shape = SubResource("RectangleShape2D_20pc6")
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+[node name="StaticBody2D4" type="StaticBody2D" parent="." groups=["Solid"]]
 position = Vector2(1066, 263)
+collision_layer = 3
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D4"]
@@ -79,25 +86,8 @@ texture = ExtResource("6_rpty4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 shape = SubResource("RectangleShape2D_5vvyt")
 
-[node name="StaticBody2D5" type="StaticBody2D" parent="."]
-position = Vector2(957, 464)
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D5"]
-texture = ExtResource("7_6jj8j")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
-shape = SubResource("RectangleShape2D_c6i3y")
-
-[node name="Area2D" type="Area2D" parent="."]
-process_mode = 4
-position = Vector2(662, 1052)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_lhr70")
-
 [node name="SceneLimit" type="Marker2D" parent="."]
 position = Vector2(658, 1162)
 
-[connection signal="body_entered" from="Area2D" to="AnimPlayer" method="_on_area_2d_body_entered"]
+[node name="Destructable" parent="." instance=ExtResource("6_05pb0")]
+material = SubResource("ShaderMaterial_xcayt")

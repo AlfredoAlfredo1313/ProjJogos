@@ -23,6 +23,8 @@ window/stretch/mode="viewport"
 
 Player=""
 HUD=""
+Destructable="Coisas com HP"
+Solid=""
 
 [input]
 

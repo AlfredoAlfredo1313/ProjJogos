@@ -1,8 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://d3equlu2k18pa"]
+[gd_scene load_steps=26 format=3 uid="uid://d3equlu2k18pa"]
 
 [ext_resource type="Script" uid="uid://bkv0gni4voe8x" path="res://Player/AnimPlayer.gd" id="1_kpjcp"]
 [ext_resource type="Texture2D" uid="uid://b0f85xqy4tetm" path="res://Sprites/char.png" id="1_xhfnw"]
 [ext_resource type="AudioStream" uid="uid://d12aaump7v4xs" path="res://SFX/jump1.ogg" id="3_2n4i2"]
+[ext_resource type="Script" uid="uid://iljegkamfg0y" path="res://Weapons/BasicGun.gd" id="4_3q168"]
+[ext_resource type="PackedScene" uid="uid://ciu6qrhn3f35e" path="res://Weapons/Bullet.tscn" id="5_n20f4"]
+[ext_resource type="Script" uid="uid://c37wddtn7w0e0" path="res://Weapons/Lock_on_gun.gd" id="6_n20f4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kpjcp"]
 atlas = ExtResource("1_xhfnw")
@@ -142,6 +145,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xhfnw"]
 size = Vector2(24, 41)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_n20f4"]
+
 [node name="AnimPlayer" type="CharacterBody2D"]
 script = ExtResource("1_kpjcp")
 
@@ -159,3 +164,19 @@ shape = SubResource("RectangleShape2D_xhfnw")
 stream = ExtResource("3_2n4i2")
 volume_db = -6.0
 bus = &"SFX"
+
+[node name="BasicGun" type="Node2D" parent="."]
+script = ExtResource("4_3q168")
+bullet = ExtResource("5_n20f4")
+
+[node name="LockOnGun" type="Node2D" parent="."]
+script = ExtResource("6_n20f4")
+
+[node name="Area2D" type="Area2D" parent="LockOnGun"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LockOnGun/Area2D"]
+scale = Vector2(39.31, 39.31)
+shape = SubResource("CircleShape2D_n20f4")
+
+[connection signal="area_entered" from="LockOnGun/Area2D" to="LockOnGun" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="LockOnGun/Area2D" to="LockOnGun" method="_on_area_2d_area_exited"]
