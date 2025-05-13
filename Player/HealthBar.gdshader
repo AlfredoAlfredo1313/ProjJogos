@@ -8,10 +8,12 @@ void vertex() {
 
 void fragment() {
 	float alpha =  1.0;
-	if (hp_per <= UV.x) {
+	if (hp_per <= UV.x)
 		alpha = 0.0;
-	}
-	COLOR = vec4(mix(red, green, hp_per), alpha);
+	if(hp_per >= 0.5) 
+		COLOR = vec4(mix(vec3(1.0, 1.0, 0), green, (hp_per - 0.5) * 2.0), alpha);
+	else
+		COLOR = vec4(mix(red, vec3(1.0, 1.0, 0), hp_per * 2.0), alpha);
 }
 
 //void light() {

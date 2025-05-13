@@ -8,11 +8,6 @@ func shoot():
 func _enter_tree() -> void:
 	tween = create_tween()
 	tween.tween_callback(func() : 
-		if detected_destructable.is_empty():
-			print("le callback")
-		else:
-			print(detected_destructable[0].name)
-		_draw()
 		if detected_destructable.size() <= 1:
 			return
 		detected_destructable.sort_custom(sort_by_distance)
@@ -38,10 +33,9 @@ func sort_by_distance(a : Node2D, b : Node2D):
 	
 func _draw() -> void:
 	if detected_destructable.is_empty():
-		print("le callback")
 		return
-	var player_pos = get_viewport_transform() * global_position
-	var target_pos = get_viewport_transform() * detected_destructable[0].global_position
+	var player_pos = get_viewport_transform().translated_local(global_position).origin
+	var target_pos = get_viewport_transform().translated_local(detected_destructable[0].global_position).origin
 	print(detected_destructable[0].name)
 	draw_line(player_pos, target_pos, Color.RED, 20, true)
 	

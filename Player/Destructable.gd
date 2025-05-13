@@ -10,10 +10,13 @@ func deal_damage(damage : int) -> void:
 	hp -= damage
 	var tween = create_tween()
 	tween.tween_method(
-	func(value): mat.set_shader_parameter("hp_per", value),  
-	float(hp + damage)/float(start_hp),
-	float(hp)/float(start_hp),
+		func(value): 
+			mat.set_shader_parameter("hp_per", value),  
+			mat.get_shader_parameter("hp_per"),
+			float(hp)/float(start_hp),
 	0.5
-  );
-	if(hp <= 0):
-		queue_free()
+	);
+	tween.finished.connect(func(): 
+		if(hp <= 0):
+			queue_free()	
+	)
