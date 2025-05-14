@@ -1,10 +1,10 @@
-[gd_scene load_steps=11 format=4 uid="uid://60okax2aajfx"]
+[gd_scene load_steps=10 format=4 uid="uid://60okax2aajfx"]
 
+[ext_resource type="Script" uid="uid://dd88ahvt4si8v" path="res://Levels/Level1.gd" id="1_05pb0"]
 [ext_resource type="Texture2D" uid="uid://b354favys571l" path="res://Tileset/tilemap.png" id="1_nutv8"]
 [ext_resource type="PackedScene" uid="uid://d3equlu2k18pa" path="res://Player/AnimPlayer.tscn" id="1_ysn8j"]
 [ext_resource type="PackedScene" uid="uid://ciu6qrhn3f35e" path="res://Weapons/Bullet.tscn" id="2_6ll4n"]
 [ext_resource type="PackedScene" uid="uid://bgkdd4vdlmf21" path="res://Player/Destructable.tscn" id="6_05pb0"]
-[ext_resource type="Shader" uid="uid://1wjb43dlttla" path="res://Player/HealthBar.gdshader" id="7_dl8mf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_05pb0"]
 texture = ExtResource("1_nutv8")
@@ -151,13 +151,10 @@ size = Vector2(1200, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xcayt"]
 size = Vector2(1600, 40)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xcayt"]
-shader = ExtResource("7_dl8mf")
-shader_parameter/hp_per = 1.0
-shader_parameter/green = Vector3(0, 255, 0)
-shader_parameter/red = Vector3(255, 0, 0)
-
-[node name="Level1" type="Node2D"]
+[node name="Level1" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_05pb0")
+destructable_scene = ExtResource("6_05pb0")
+player = NodePath("AnimPlayer")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 scale = Vector2(3, 3)
@@ -198,6 +195,3 @@ shape = SubResource("RectangleShape2D_xcayt")
 position = Vector2(-600, -800)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_xcayt")
-
-[node name="Destructable" parent="." instance=ExtResource("6_05pb0")]
-material = SubResource("ShaderMaterial_xcayt")
