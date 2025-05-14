@@ -23,8 +23,8 @@ func _physics_process(delta: float) -> void:
 		player = current_scene.get_node("AnimPlayer")
 		scene_limit = current_scene.get_node("SceneLimit")
 	
-	if player.position.y > scene_limit.position.y:
-		get_tree().change_scene_to_file("res://Levels/GameOver.tscn")
+	#if player.position.y > scene_limit.position.y:
+		#get_tree().change_scene_to_file("res://Levels/GameOver.tscn")
 		
 	if Input.is_action_just_pressed("go_to_level_2"):
 		call_deferred("goto_scene", "res://Levels/Level2.tscn")
