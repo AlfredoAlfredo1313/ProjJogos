@@ -28,6 +28,7 @@ void fragment() {
 shader = SubResource("Shader_s5683")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2p5hl"]
+resource_local_to_scene = true
 shader = ExtResource("4_03l6u")
 shader_parameter/hp_per = 1.0
 shader_parameter/green = Vector3(0, 1, 0)

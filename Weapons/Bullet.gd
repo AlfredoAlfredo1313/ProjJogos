@@ -1,7 +1,7 @@
 extends Area2D
 class_name Bullet
 
-@export var speed = 500
+@export var speed = 500 
 var rot_angle : float
 var set_ready = false
 

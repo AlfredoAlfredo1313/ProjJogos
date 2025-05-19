@@ -178,5 +178,7 @@ script = ExtResource("6_n20f4")
 scale = Vector2(39.31, 39.31)
 shape = SubResource("CircleShape2D_n20f4")
 
+[node name="Line2D" type="Line2D" parent="LockOnGun"]
+
 [connection signal="area_entered" from="LockOnGun/Area2D" to="LockOnGun" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="LockOnGun/Area2D" to="LockOnGun" method="_on_area_2d_area_exited"]

@@ -5,9 +5,9 @@ extends Node2D
 
 func _ready():
 	for i in range(3):  
-		spawn_enemy()
+		spawn_enemy(i)
 
-func spawn_enemy():
+func spawn_enemy(i):
 	var enemy = destructable_scene.instantiate()
 	
 	var rand_x = randi_range(-200, 1000)
@@ -15,5 +15,5 @@ func spawn_enemy():
 	enemy.global_position = Vector2(rand_x, rand_y)
 
 	enemy.player = player
-
+	
 	add_child(enemy)
