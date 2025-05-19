@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://d3equlu2k18pa"]
+[gd_scene load_steps=29 format=3 uid="uid://d3equlu2k18pa"]
 
 [ext_resource type="Script" uid="uid://bkv0gni4voe8x" path="res://Player/AnimPlayer.gd" id="1_kpjcp"]
 [ext_resource type="Texture2D" uid="uid://b0f85xqy4tetm" path="res://Sprites/char.png" id="1_xhfnw"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://iljegkamfg0y" path="res://Weapons/BasicGun.gd" id="4_3q168"]
 [ext_resource type="PackedScene" uid="uid://ciu6qrhn3f35e" path="res://Weapons/Bullet.tscn" id="5_n20f4"]
 [ext_resource type="Script" uid="uid://c37wddtn7w0e0" path="res://Weapons/Lock_on_gun.gd" id="6_n20f4"]
+[ext_resource type="Shader" uid="uid://1wjb43dlttla" path="res://Player/HealthBar.gdshader" id="7_v1a1l"]
+[ext_resource type="Script" uid="uid://cbfdknisylbek" path="res://Player/Destructable.gd" id="8_0qryd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kpjcp"]
 atlas = ExtResource("1_xhfnw")
@@ -147,7 +149,16 @@ size = Vector2(24, 41)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n20f4"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p75ea"]
+resource_local_to_scene = true
+shader = ExtResource("7_v1a1l")
+shader_parameter/hp_per = 1.0
+shader_parameter/green = Vector3(0, 1, 0)
+shader_parameter/red = Vector3(1, 0, 0)
+
 [node name="AnimPlayer" type="CharacterBody2D"]
+collision_layer = 9
+collision_mask = 9
 script = ExtResource("1_kpjcp")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
@@ -169,16 +180,26 @@ bus = &"SFX"
 script = ExtResource("4_3q168")
 bullet = ExtResource("5_n20f4")
 
-[node name="LockOnGun" type="Node2D" parent="."]
-script = ExtResource("6_n20f4")
+[node name="Vida" type="Area2D" parent="."]
+script = ExtResource("8_0qryd")
+morrer = false
 
-[node name="Area2D" type="Area2D" parent="LockOnGun"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LockOnGun/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vida"]
 scale = Vector2(39.31, 39.31)
 shape = SubResource("CircleShape2D_n20f4")
 
+[node name="ColorRect" type="ColorRect" parent="Vida"]
+material = SubResource("ShaderMaterial_p75ea")
+offset_left = -55.0
+offset_top = -43.0
+offset_right = 56.0
+offset_bottom = -33.0
+color = Color(0, 0, 0, 1)
+
+[node name="LockOnGun" type="Node2D" parent="."]
+script = ExtResource("6_n20f4")
+
 [node name="Line2D" type="Line2D" parent="LockOnGun"]
 
-[connection signal="area_entered" from="LockOnGun/Area2D" to="LockOnGun" method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="LockOnGun/Area2D" to="LockOnGun" method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="Vida" to="LockOnGun" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Vida" to="LockOnGun" method="_on_area_2d_area_exited"]

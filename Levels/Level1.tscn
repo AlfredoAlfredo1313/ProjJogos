@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b354favys571l" path="res://Tileset/tilemap.png" id="1_nutv8"]
 [ext_resource type="PackedScene" uid="uid://d3equlu2k18pa" path="res://Player/AnimPlayer.tscn" id="1_ysn8j"]
 [ext_resource type="PackedScene" uid="uid://ciu6qrhn3f35e" path="res://Weapons/Bullet.tscn" id="2_6ll4n"]
-[ext_resource type="PackedScene" uid="uid://bgkdd4vdlmf21" path="res://Player/Destructable.tscn" id="6_05pb0"]
+[ext_resource type="PackedScene" uid="uid://bgkdd4vdlmf21" path="res://Player/Enemy.tscn" id="6_05pb0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_05pb0"]
 texture = ExtResource("1_nutv8")

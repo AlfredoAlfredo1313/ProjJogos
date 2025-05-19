@@ -14,6 +14,5 @@ func spawn_enemy(i):
 	var rand_y = randi_range(-200, 1000)
 	enemy.global_position = Vector2(rand_x, rand_y)
 
-	enemy.player = player
-	
+	enemy.get_child(0).player = player
 	add_child(enemy)

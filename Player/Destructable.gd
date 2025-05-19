@@ -4,9 +4,8 @@ class_name Destructable
 
 @export var start_hp = 5
 @export var hp = 5
+@export var morrer = true
 @onready var mat  = $ColorRect.material
-@export var speed = 80.0
-@onready var player = null
 
 func deal_damage(damage : int) -> void:
 	hp -= damage
@@ -19,13 +18,14 @@ func deal_damage(damage : int) -> void:
 	0.5
 	);
 	tween.finished.connect(func(): 
-		if(hp <= 0):
+		if(hp <= 0 && morrer):
 			queue_free()	
 	)
-func _process(delta):
-	if not player:
-		player = get_tree().get_root().get_node("Player/AnimPlayer")
-		if not player:
-			return
-	var direction = (player.global_position - global_position).normalized()
-	position += direction * speed * delta
+
+		
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is Player:
+		body.vida.deal_damage(1)
+	pass # Replace with function body.

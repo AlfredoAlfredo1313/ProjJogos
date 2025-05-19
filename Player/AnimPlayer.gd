@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name Player
 @export var speed := 300.0
 @export var jump_speed := -1000.0
 @export var gravity := 2500.0
@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var jump_sound = $JumpSound
 @onready var basic_gun = $BasicGun as IGun
 @onready var lock_gun = $LockOnGun as IGun
+@onready var vida = $Vida
 
 @export var bullet : PackedScene
 
@@ -75,8 +76,9 @@ func _physics_process(delta):
 	move_side(delta)
 	aim(delta)
 	
-	#if position.y >= 1200:
-		#get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
+	if vida.hp <= 0:
+		print('morreuuuu')
+		get_tree().change_scene_to_file("res://Levels/GameOver.tscn")
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
