@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 @export var speed := 300.0
+@export var knockback_strength = 300
+@export var knockback_duration = 0.2
 @export var jump_speed := -1000.0
 @export var gravity := 2500.0
 
@@ -11,6 +13,10 @@ class_name Player
 @onready var vida = $Vida
 
 @export var bullet : PackedScene
+
+var knockback_velocity = Vector2.ZERO
+var knockback_timer = 0.0
+
 
 
 func animate_side():
@@ -34,10 +40,10 @@ func get_side_input():
 		
 		 
 
-func move_side(delta):
+func move_side(): 
+	move_and_slide()
 	get_side_input()
 	animate_side()
-	move_and_slide()
 
 func print_position():
 	print(position)
@@ -72,9 +78,17 @@ func aim(delta):
 	
 
 func _physics_process(delta):
-	# move_8way(delta)
-	move_side(delta)
+	var input_vector = Vector2.ZERO
 	aim(delta)
+	if knockback_timer <= 0:
+		input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+		input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+		input_vector = input_vector.normalized()
+		velocity = input_vector * speed
+	else:
+		knockback_timer -= delta
+		velocity = knockback_velocity
+	move_side()
 	
 	if vida.hp <= 0:
 		print('morreuuuu')
@@ -84,3 +98,9 @@ func _physics_process(delta):
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	get_tree().change_scene_to_file("res://Levels/GameOver.tscn")
 	pass # Replace with function body.
+	
+func apply_knockback(from_position: Vector2):
+	var direction = (global_position - from_position).normalized()
+	knockback_velocity = direction * knockback_strength
+	knockback_timer = knockback_duration
+	sprite.pisca_player()

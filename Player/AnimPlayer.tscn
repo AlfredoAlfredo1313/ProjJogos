@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://d3equlu2k18pa"]
+[gd_scene load_steps=30 format=3 uid="uid://d3equlu2k18pa"]
 
 [ext_resource type="Script" uid="uid://bkv0gni4voe8x" path="res://Player/AnimPlayer.gd" id="1_kpjcp"]
 [ext_resource type="Texture2D" uid="uid://b0f85xqy4tetm" path="res://Sprites/char.png" id="1_xhfnw"]
+[ext_resource type="Script" uid="uid://dvbdk5tghvhe0" path="res://Player/pisca_player.gd" id="3_0qryd"]
 [ext_resource type="AudioStream" uid="uid://d12aaump7v4xs" path="res://SFX/jump1.ogg" id="3_2n4i2"]
 [ext_resource type="Script" uid="uid://iljegkamfg0y" path="res://Weapons/BasicGun.gd" id="4_3q168"]
 [ext_resource type="PackedScene" uid="uid://ciu6qrhn3f35e" path="res://Weapons/Bullet.tscn" id="5_n20f4"]
@@ -164,6 +165,7 @@ script = ExtResource("1_kpjcp")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_efikj")
 animation = &"down"
+script = ExtResource("3_0qryd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 10.5)
@@ -183,6 +185,7 @@ bullet = ExtResource("5_n20f4")
 [node name="Vida" type="Area2D" parent="."]
 script = ExtResource("8_0qryd")
 morrer = false
+hasInvincible = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vida"]
 scale = Vector2(39.31, 39.31)
