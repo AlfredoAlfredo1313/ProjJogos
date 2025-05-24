@@ -11,8 +11,11 @@ class_name Player
 @onready var basic_gun = $BasicGun as IGun
 @onready var lock_gun = $LockOnGun as IGun
 @onready var vida = $Vida
-
 @export var bullet : PackedScene
+
+@export var isInvincible:bool = false
+@export var TIMER_CONST = 2.0
+var timer:float = TIMER_CONST
 
 var knockback_velocity = Vector2.ZERO
 var knockback_timer = 0.0
@@ -89,6 +92,7 @@ func _physics_process(delta):
 		knockback_timer -= delta
 		velocity = knockback_velocity
 	move_side()
+	timerIvencibility(delta)
 	
 	if vida.hp <= 0:
 		print('morreuuuu')
@@ -104,3 +108,14 @@ func apply_knockback(from_position: Vector2):
 	knockback_velocity = direction * knockback_strength
 	knockback_timer = knockback_duration
 	sprite.pisca_player()
+	isInvincible = true
+	
+	
+func timerIvencibility(delta):
+	if !isInvincible :
+		return
+	timer -= delta
+	if timer<=0 :
+		isInvincible = false
+		timer = TIMER_CONST
+			

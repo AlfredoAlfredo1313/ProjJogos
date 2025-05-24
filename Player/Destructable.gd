@@ -6,14 +6,9 @@ class_name Destructable
 @export var hp = 5
 @export var morrer = true
 @onready var mat  = $ColorRect.material
-@export var TIMER_CONST = 2.0
-@export var hasInvincible:bool 
-var timer:float = TIMER_CONST
-var isInvincible:bool = false
+
 
 func deal_damage(damage : int) -> void:
-	if isInvincible: return
-	if hasInvincible: isInvincible = true
 	hp -= damage
 	var tween = create_tween()
 	tween.tween_method(
@@ -32,23 +27,13 @@ func deal_damage(damage : int) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is Player:
+	if body is Player and !body.isInvincible:
 		body.vida.collision_layer = 0
 		body.vida.deal_damage(1)
 		body.apply_knockback(global_position)
 		
+	
+	
 
-func _process(delta: float) -> void:
-	timerIvencibility(delta)
-	
-	
-func timerIvencibility(delta):
-	if !hasInvincible or !isInvincible :
-		return
-	timer -= delta
-	if timer<=0 :
-		isInvincible = false
-		timer = TIMER_CONST
-	collision_layer = 1	
 	
 	
