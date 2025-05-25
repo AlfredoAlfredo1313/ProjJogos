@@ -21,6 +21,7 @@ func deal_damage(damage : int) -> void:
 	tween.finished.connect(func(): 
 		if(hp <= 0 && morrer):
 			queue_free()	
+			get_tree().call_group("HUD", "update_score")
 	)
 
 		

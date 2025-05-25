@@ -109,6 +109,7 @@ func apply_knockback(from_position: Vector2):
 	knockback_timer = knockback_duration
 	sprite.pisca_player()
 	isInvincible = true
+	jump_sound.play()
 	
 	
 func timerIvencibility(delta):
