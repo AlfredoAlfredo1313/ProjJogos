@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dp8nua3qlwscf"]
+[gd_scene load_steps=9 format=3 uid="uid://d1a1emmopr4a5"]
 
 [ext_resource type="Script" uid="uid://cbfdknisylbek" path="res://Common/Destructable.gd" id="1_3yf0x"]
 [ext_resource type="Script" uid="uid://cohaxtuojrepf" path="res://Inimigos/EnemySimple.gd" id="2_y4bpy"]
@@ -57,6 +57,13 @@ offset_top = -43.0
 offset_right = 56.0
 offset_bottom = -33.0
 color = Color(0, 0, 0, 1)
+
+[node name="RepositionTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.2
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

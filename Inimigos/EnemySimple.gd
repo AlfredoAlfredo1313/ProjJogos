@@ -15,7 +15,6 @@ func get_random_point_near_player(player_position: Vector2, radius: float) -> Ve
 	var offset = Vector2(cos(angle), sin(angle)) * radius
 	return offset
 
-
 func _on_timer_timeout() -> void:
 	if ! player:
 		return

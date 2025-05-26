@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=4 uid="uid://60okax2aajfx"]
+[gd_scene load_steps=12 format=4 uid="uid://60okax2aajfx"]
 
 [ext_resource type="Script" uid="uid://dd88ahvt4si8v" path="res://Levels/Level1.gd" id="1_05pb0"]
 [ext_resource type="Texture2D" uid="uid://b354favys571l" path="res://Tileset/tilemap.png" id="1_nutv8"]
 [ext_resource type="PackedScene" uid="uid://d3equlu2k18pa" path="res://Player/AnimPlayer.tscn" id="1_ysn8j"]
 [ext_resource type="PackedScene" uid="uid://ciu6qrhn3f35e" path="res://Weapons/Bullet.tscn" id="2_6ll4n"]
 [ext_resource type="PackedScene" uid="uid://bgkdd4vdlmf21" path="res://Inimigos/Enemy.tscn" id="6_05pb0"]
+[ext_resource type="FontFile" uid="uid://0mcwamf86rrp" path="res://Fonts/Xolonium-Regular.ttf" id="6_dl8mf"]
+[ext_resource type="Script" uid="uid://chkscqfwwhu88" path="res://Levels/WaveAnim.gd" id="6_xcayt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_05pb0"]
 texture = ExtResource("1_nutv8")
@@ -155,6 +157,7 @@ size = Vector2(1600, 40)
 script = ExtResource("1_05pb0")
 destructable_scene = ExtResource("6_05pb0")
 player = NodePath("AnimPlayer")
+lista_inimigos = Array[int]([3, 5, 3])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 scale = Vector2(3, 3)
@@ -195,3 +198,24 @@ shape = SubResource("RectangleShape2D_xcayt")
 position = Vector2(-600, -800)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_xcayt")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -222.0
+offset_top = -219.0
+offset_right = 1423.0
+offset_bottom = 1024.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_xcayt")
+
+[node name="GameOver" type="Label" parent="CenterContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("6_dl8mf")
+theme_override_font_sizes/font_size = 120
+text = "Game Over"

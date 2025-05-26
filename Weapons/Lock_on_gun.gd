@@ -4,7 +4,7 @@ var tween : Tween
 @onready var line = $Line2D
 
 func shoot():
-	print("Shooot")
+	pass
 
 func _enter_tree() -> void:
 	$Line2D.add_point(Vector2.ZERO)

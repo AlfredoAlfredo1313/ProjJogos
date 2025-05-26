@@ -199,9 +199,11 @@ offset_bottom = -33.0
 color = Color(0, 0, 0, 1)
 
 [node name="LockOnGun" type="Node2D" parent="."]
+visible = false
 script = ExtResource("6_n20f4")
 
 [node name="Line2D" type="Line2D" parent="LockOnGun"]
+visible = false
 
 [connection signal="area_entered" from="Vida" to="LockOnGun" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Vida" to="LockOnGun" method="_on_area_2d_area_exited"]

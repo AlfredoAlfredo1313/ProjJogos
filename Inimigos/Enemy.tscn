@@ -59,7 +59,6 @@ offset_bottom = -33.0
 color = Color(0, 0, 0, 1)
 
 [node name="Timer" type="Timer" parent="."]
-process_callback = 0
 wait_time = 0.2
 autostart = true
 

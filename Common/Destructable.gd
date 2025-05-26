@@ -6,6 +6,7 @@ class_name Destructable
 @export var hp = 5
 @export var morrer = true
 @onready var mat  = $ColorRect.material
+signal morreu
 
 
 func deal_damage(damage : int) -> void:
@@ -20,6 +21,7 @@ func deal_damage(damage : int) -> void:
 	);
 	tween.finished.connect(func(): 
 		if(hp <= 0 && morrer):
+			morreu.emit()
 			queue_free()	
 			get_tree().call_group("HUD", "update_score")
 	)
