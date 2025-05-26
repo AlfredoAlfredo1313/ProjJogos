@@ -43,5 +43,7 @@ func _on_area_entered(area: Area2D) -> void:
 				break
 		if !in_layer:
 			return
+		if destruct_object.name == "Vida":
+			if area.get_parent().isInvincible: return
 		destruct_object.receive_damage(1, global_position)
 		queue_free()
