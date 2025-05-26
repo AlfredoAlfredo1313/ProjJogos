@@ -48,9 +48,6 @@ func move_side():
 	get_side_input()
 	animate_side()
 
-func print_position():
-	print(position)
-
 func get_8way_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed

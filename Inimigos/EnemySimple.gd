@@ -14,7 +14,6 @@ func _process(delta):
 	if x>200: 
 		basic_gun.enemy_shoot(player.global_position)
 		x = 0
-		print(player.global_position)
 	x = x+1
 
 func get_random_point_near_player(player_position: Vector2, radius: float) -> Vector2:

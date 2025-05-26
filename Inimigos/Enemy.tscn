@@ -41,6 +41,7 @@ shader_parameter/red = Vector3(1, 0, 0)
 collision_layer = 7
 collision_mask = 8
 script = ExtResource("1_nx8t7")
+damage_layers = Array[int]([1])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 0.5)
@@ -50,6 +51,7 @@ script = ExtResource("2_qp4pf")
 [node name="BasicGun" type="Node2D" parent="CollisionShape2D"]
 script = ExtResource("3_lkj6i")
 bullet = ExtResource("4_4tag4")
+damage_layer = Array[int]([0, 2])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 1)

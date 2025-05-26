@@ -181,13 +181,17 @@ bus = &"SFX"
 [node name="BasicGun" type="Node2D" parent="."]
 script = ExtResource("4_3q168")
 bullet = ExtResource("5_n20f4")
+damage_layer = Array[int]([1, 2])
 
-[node name="Vida" type="Area2D" parent="."]
+[node name="Vida" type="Area2D" parent="." groups=["Destructable"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("8_0qryd")
 morrer = false
+damage_layers = Array[int]([0])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vida"]
-scale = Vector2(39.31, 39.31)
+scale = Vector2(2.85, 2.85)
 shape = SubResource("CircleShape2D_n20f4")
 
 [node name="ColorRect" type="ColorRect" parent="Vida"]
@@ -201,6 +205,7 @@ color = Color(0, 0, 0, 1)
 [node name="LockOnGun" type="Node2D" parent="."]
 visible = false
 script = ExtResource("6_n20f4")
+damage_layer = Array[int]([1, 2])
 
 [node name="Line2D" type="Line2D" parent="LockOnGun"]
 visible = false

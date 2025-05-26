@@ -1,15 +1,15 @@
 extends Area2D
 
 class_name Destructable
-
 @export var start_hp = 5
 @export var hp = 5
 @export var morrer = true
+@export var damage_layers : Array[DamageLayers.damage_layers]
 @onready var mat  = $ColorRect.material
 signal morreu
 
 
-func deal_damage(damage : int) -> void:
+func receive_damage(damage : int) -> void:
 	hp -= damage
 	var tween = create_tween()
 	tween.tween_method(
@@ -25,12 +25,11 @@ func deal_damage(damage : int) -> void:
 			queue_free()	
 			get_tree().call_group("HUD", "update_score")
 	)
-
 	
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player and !body.isInvincible:
+		body.vida.receive_damage(1)
 		body.vida.collision_layer = 0
-		body.vida.deal_damage(1)
 		body.apply_knockback(global_position)
 		
 	

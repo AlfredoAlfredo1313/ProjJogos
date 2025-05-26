@@ -7,6 +7,7 @@ func shoot():
 		b.position = global_position
 		owner.owner.add_child(b)
 		var bullet = b as Bullet
+		bullet.damage_layers = damage_layer
 		bullet.set_rot(rotation)
 		var pointer_vector = (get_global_mouse_position() - global_position).normalized()
 		bullet.set_rot(pointer_vector.angle())
@@ -17,6 +18,7 @@ func enemy_shoot(target):
 		b.source = owner
 		get_tree().current_scene.add_child(b)
 		var bullet = b as Bullet
+		bullet.damage_layers = damage_layer
 		bullet.set_rot(rotation)
 		var pointer_vector = (target - global_position).normalized()
 		bullet.set_rot(pointer_vector.angle())

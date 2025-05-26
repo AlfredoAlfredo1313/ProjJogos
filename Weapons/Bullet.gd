@@ -4,6 +4,7 @@ class_name Bullet
 @export var speed = 500 
 var rot_angle : float
 var set_ready = false
+var damage_layers : Array[DamageLayers.damage_layers]
 var source: Node = null
 
 
@@ -28,13 +29,19 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 func animation_finished() -> void:
 	pass
 
-
 func _on_area_entered(area: Area2D) -> void:
-	if area == source:
-		return
 	if area.is_in_group("Solid"):
 		queue_free()
 	elif area.is_in_group("Destructable"):
 		var destruct_object = area as Destructable
-		destruct_object.deal_damage(1)
+		var in_layer = false
+		if area.name == "Vida":
+			print(area.name, " ", damage_layers, " da bala", destruct_object.damage_layers, " do destructable")
+		for layer in damage_layers:
+			if layer in destruct_object.damage_layers:
+				in_layer = true
+				break
+		if !in_layer:
+			return
+		destruct_object.receive_damage(1)
 		queue_free()
