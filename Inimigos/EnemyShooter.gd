@@ -1,4 +1,5 @@
 extends Node2D
+class_name EnemyShooter
 var player
 @export var speed = 80.0
 @export var orbit_radius: float = 100.0

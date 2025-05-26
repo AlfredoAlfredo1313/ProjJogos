@@ -24,9 +24,7 @@ func deal_damage(damage : int) -> void:
 			get_tree().call_group("HUD", "update_score")
 	)
 
-		
-
-
+	
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player and !body.isInvincible:
 		body.vida.collision_layer = 0

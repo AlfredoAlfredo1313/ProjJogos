@@ -7,8 +7,8 @@
 [ext_resource type="Script" uid="uid://iljegkamfg0y" path="res://Weapons/BasicGun.gd" id="4_3q168"]
 [ext_resource type="PackedScene" uid="uid://ciu6qrhn3f35e" path="res://Weapons/Bullet.tscn" id="5_n20f4"]
 [ext_resource type="Script" uid="uid://c37wddtn7w0e0" path="res://Weapons/Lock_on_gun.gd" id="6_n20f4"]
-[ext_resource type="Shader" uid="uid://1wjb43dlttla" path="res://Player/HealthBar.gdshader" id="7_v1a1l"]
-[ext_resource type="Script" uid="uid://cbfdknisylbek" path="res://Player/Destructable.gd" id="8_0qryd"]
+[ext_resource type="Shader" uid="uid://1wjb43dlttla" path="res://Common/HealthBar.gdshader" id="7_v1a1l"]
+[ext_resource type="Script" uid="uid://cbfdknisylbek" path="res://Common/Destructable.gd" id="8_0qryd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kpjcp"]
 atlas = ExtResource("1_xhfnw")
