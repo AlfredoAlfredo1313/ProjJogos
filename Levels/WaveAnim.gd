@@ -1,6 +1,5 @@
 extends Label
 
-
 func anim(_text : String):
 	visible_characters = 0
 	text = _text
