@@ -1,7 +1,11 @@
-extends CenterContainer
-@onready var label = $GameOver
+extends Label
 
-func go_to_center(text):
-	var tween = create_tween()
-	label.text = text
+
+func anim(_text : String):
+	visible_characters = 0
+	text = _text
+	var vezes = _text.length()
+	for i in range(vezes):
+		visible_characters = i
+		await get_tree().create_timer(0.4).timeout
 	

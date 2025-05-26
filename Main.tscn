@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvdfsmvn6flws"]
+[gd_scene load_steps=6 format=3 uid="uid://bvdfsmvn6flws"]
 
 [ext_resource type="Script" uid="uid://bxqodkil6popv" path="res://Game.gd" id="1_lgr22"]
 [ext_resource type="Script" uid="uid://bfq3swfrk3l1j" path="res://UI/Label.gd" id="3_fos0i"]
 [ext_resource type="PackedScene" uid="uid://60okax2aajfx" path="res://Levels/Level1.tscn" id="4_3dxm6"]
 [ext_resource type="FontFile" uid="uid://0mcwamf86rrp" path="res://Fonts/Xolonium-Regular.ttf" id="8_trn2v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cm0pq"]
+font_size = 120
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_lgr22")
@@ -16,6 +21,21 @@ offset_bottom = 23.0
 theme_override_fonts/font = ExtResource("8_trn2v")
 theme_override_font_sizes/font_size = 30
 text = "Score: 0"
+script = ExtResource("3_fos0i")
+
+[node name="Wave" type="Label" parent="HUD" groups=["HUD"]]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_trn2v")
+theme_override_font_sizes/font_size = 30
+text = "Wave"
+label_settings = SubResource("LabelSettings_cm0pq")
+horizontal_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
 script = ExtResource("3_fos0i")
 
 [node name="Level1" parent="." instance=ExtResource("4_3dxm6")]

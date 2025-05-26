@@ -20,8 +20,14 @@ var timer:float = TIMER_CONST
 var knockback_velocity = Vector2.ZERO
 var knockback_timer = 0.0
 
-
-
+func _ready() -> void:
+	vida.recebeu_dano.connect(
+		func(pos:Vector2):
+			print("damageou")
+			#vida.collision_layer = 0
+			apply_knockback(pos)
+	)
+	
 func animate_side():
 	if velocity.x > 0:
 		sprite.play("right")
@@ -39,9 +45,7 @@ func get_side_input():
 	
 	if Input.is_action_just_pressed("click"):
 		basic_gun.shoot()
-		lock_gun.shoot()
-		
-		 
+		lock_gun.shoot() 
 
 func move_side(): 
 	move_and_slide()

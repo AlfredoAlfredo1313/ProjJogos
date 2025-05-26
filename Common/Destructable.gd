@@ -7,9 +7,10 @@ class_name Destructable
 @export var damage_layers : Array[DamageLayers.damage_layers]
 @onready var mat  = $ColorRect.material
 signal morreu
+signal recebeu_dano
 
-
-func receive_damage(damage : int) -> void:
+func receive_damage(damage : int, pos : Vector2) -> void:
+	recebeu_dano.emit(pos)
 	hp -= damage
 	var tween = create_tween()
 	tween.tween_method(
@@ -28,9 +29,7 @@ func receive_damage(damage : int) -> void:
 	
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player and !body.isInvincible:
-		body.vida.receive_damage(1)
-		body.vida.collision_layer = 0
-		body.apply_knockback(global_position)
+		body.vida.receive_damage(1, global_position)
 		
 	
 	
