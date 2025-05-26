@@ -47,3 +47,6 @@ func _on_area_entered(area: Area2D) -> void:
 			if area.get_parent().isInvincible: return
 		destruct_object.receive_damage(1, global_position)
 		queue_free()
+
+func set_bullet_color(color: Color) -> void:
+	$BulletSprite.modulate = color

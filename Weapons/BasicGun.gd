@@ -22,5 +22,5 @@ func enemy_shoot(target):
 		bullet.set_rot(rotation)
 		var pointer_vector = (target - global_position).normalized()
 		bullet.set_rot(pointer_vector.angle())
-	
+		bullet.set_bullet_color(Color(1, 0, 0))
 	
