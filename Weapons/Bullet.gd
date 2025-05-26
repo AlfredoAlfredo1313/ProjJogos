@@ -4,6 +4,7 @@ class_name Bullet
 @export var speed = 500 
 var rot_angle : float
 var set_ready = false
+var source: Node = null
 
 
 # Called when the node enters the scene tree for the first time.
@@ -30,6 +31,8 @@ func animation_finished() -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
+	if area == source:
+		return
 	if area.is_in_group("Solid"):
 		queue_free()
 	elif area.is_in_group("Destructable"):
