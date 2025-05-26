@@ -11,6 +11,7 @@ func _ready():
 	start_wave()
 
 func start_wave():
+	get_tree().call_group("HUD", "anim", "Wave: " + str(wave_atual))
 	if lista_inimigos.size() <= wave_atual:
 		print("venceu")
 		return

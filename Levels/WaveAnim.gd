@@ -1,6 +1,7 @@
 extends Label
 
 func anim(_text : String):
+	print("chamoau")
 	visible_characters = 0
 	text = _text
 	var vezes = _text.length()
