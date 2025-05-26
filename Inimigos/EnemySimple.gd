@@ -7,8 +7,6 @@ var target_point: Vector2 = Vector2.ZERO
 var offset : Vector2
 
 func _process(delta):
-	if global_position.distance_to(target_point) < 10:
-		target_point = get_random_point_near_player(player.global_position, orbit_radius)
 	var direction = (target_point - global_position).normalized()
 	get_parent().position += direction * speed * delta
 
