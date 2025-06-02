@@ -29,12 +29,31 @@ func _ready() -> void:
 	)
 	
 func animate_side():
-	if velocity.x > 0:
-		sprite.play("right")
-	elif velocity.x < 0:
-		sprite.play("left")
-	else:
+	var dir = velocity.normalized()
+
+	if dir == Vector2.ZERO:
 		sprite.stop()
+		return
+
+	if dir.y < -0.5:
+		if dir.x < -0.5:
+			sprite.play("left_up")
+		elif dir.x > 0.5:
+			sprite.play("right_up")
+		else:
+			sprite.play("up")
+	elif dir.y > 0.5:
+		if dir.x < -0.5:
+			sprite.play("left_down")
+		elif dir.x > 0.5:
+			sprite.play("right_down")
+		else:
+			sprite.play("down")
+	else:
+		if dir.x < 0:
+			sprite.play("left_down")
+		else:
+			sprite.play("right_down")
 		
 func get_side_input():
 	velocity.x = 0
@@ -56,26 +75,7 @@ func get_8way_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
 	
-func animate():
-	if velocity.x > 0:
-		sprite.play("right")
-	elif velocity.x < 0:
-		sprite.play("left")
-	elif velocity.y > 0:
-		sprite.play("down")
-	elif velocity.y < 0:
-		sprite.play("up")
-	else:
-		sprite.stop()
 		
-func move_8way(delta): 
-	get_8way_input()
-	animate()
-	var collision_info = move_and_collide(velocity * delta)
-	if collision_info:
-		velocity = velocity.bounce(collision_info.get_normal())
-		move_and_collide(velocity * delta * 10)
-	#move_and_slide()
 	
 func aim(delta):
 	var dir_pointer = get_viewport().get_mouse_position()
