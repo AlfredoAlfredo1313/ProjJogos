@@ -3,7 +3,6 @@ extends Node2D
 @export var destructable_scene: PackedScene
 @export var player: Node2D
 @export var lista_inimigos : Array[int] = [] 
-@onready var wave_text = $CenterContainer
 var numero_inimigos
 var wave_atual = 0
 
@@ -11,7 +10,9 @@ func _ready():
 	start_wave()
 
 func start_wave():
-	get_tree().call_group("HUD", "anim", "Wave: " + str(wave_atual))
+	var s = "Wave " + str(wave_atual)
+	print(s)
+	get_tree().call_group("HUD", "anim", s)
 	if lista_inimigos.size() <= wave_atual:
 		print("venceu")
 		return
