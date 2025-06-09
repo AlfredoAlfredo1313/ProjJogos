@@ -28,32 +28,37 @@ func _ready() -> void:
 			apply_knockback(pos)
 	)
 	
+var last_dir_name := "down"  # Direção inicial padrão
 func animate_side():
 	var dir = velocity.normalized()
 
+	# Jogador parado
 	if dir == Vector2.ZERO:
-		sprite.stop()
+		sprite.play("idle_" + last_dir_name)
 		return
 
+	# Jogador se movendo
 	if dir.y < -0.5:
 		if dir.x < -0.5:
-			sprite.play("left_up")
+			last_dir_name = "left_up"
 		elif dir.x > 0.5:
-			sprite.play("right_up")
+			last_dir_name = "right_up"
 		else:
-			sprite.play("up")
+			last_dir_name = "up"
 	elif dir.y > 0.5:
 		if dir.x < -0.5:
-			sprite.play("left_down")
+			last_dir_name = "left_down"
 		elif dir.x > 0.5:
-			sprite.play("right_down")
+			last_dir_name = "right_down"
 		else:
-			sprite.play("down")
+			last_dir_name = "down"
 	else:
 		if dir.x < 0:
-			sprite.play("left_down")
+			last_dir_name = "left_down"
 		else:
-			sprite.play("right_down")
+			last_dir_name = "right_down"
+
+	sprite.play(last_dir_name)
 		
 func get_side_input():
 	velocity.x = 0

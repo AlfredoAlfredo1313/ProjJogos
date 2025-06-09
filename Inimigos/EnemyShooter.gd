@@ -8,6 +8,7 @@ var offset : Vector2
 var x:int = 0
 @onready var basic_gun = $BasicGun as IGun
 @onready var sprite = $AnimatedSprite2D
+@onready var chapeu = $ChapeuAnimate
 
 func _process(delta):
 	var direction = (target_point - global_position).normalized()
@@ -26,8 +27,11 @@ func _process(delta):
 		var dir_name = get_direction_name(direction)
 		if sprite.animation != dir_name:
 			sprite.play(dir_name)
+		if chapeu.animation != dir_name:
+			chapeu.play(dir_name)	
 	else:
 		sprite.stop()
+		chapeu.stop()
 
 func get_random_point_near_player(player_position: Vector2, radius: float) -> Vector2:
 	var angle = randf() * TAU
