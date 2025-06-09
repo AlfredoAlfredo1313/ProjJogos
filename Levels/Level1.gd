@@ -1,8 +1,8 @@
 extends Node2D
 
-@export var destructable_scene: PackedScene
+@export var enemy_shooter: PackedScene
 @export var player: Node2D
-@export var lista_inimigos : Array[int] = [] 
+@export var waves : Array[CardData] = []
 var numero_inimigos
 var wave_atual = 0
 
@@ -11,23 +11,24 @@ func _ready():
 
 func start_wave():
 	var s = "Wave " + str(wave_atual)
-	print(s)
 	get_tree().call_group("HUD", "anim", s)
-	if lista_inimigos.size() <= wave_atual:
+	if waves.size() <= wave_atual:
 		print("venceu")
 		return
-	print("wave ", wave_atual)
-	numero_inimigos = lista_inimigos[wave_atual]
-	for i in range(numero_inimigos):  
-		spawn_enemy()
-
-func spawn_enemy():
-	var enemy = destructable_scene.instantiate()
-	lista_inimigos.append(enemy)
+	var wave = waves[wave_atual]
+	numero_inimigos = wave.n_shooters + wave.n_simples
+	var ss = "numero total " + str(numero_inimigos)
+	print(ss)
+	for i in range(wave.n_shooters):  
+		spawn_enemy(enemy_shooter)
+	for i in range(wave.n_simples):  
+		spawn_enemy(enemy_shooter)
+	
+func spawn_enemy(enemy_type : PackedScene):
+	var enemy = enemy_shooter.instantiate()
 	var rand_x = randi_range(-200, 1000)
 	var rand_y = randi_range(-200, 1000)
 	enemy.global_position = Vector2(rand_x, rand_y)
-	
 	enemy.get_child(0).player = player
 	(enemy as Destructable).morreu.connect(matou_inimigo)
 	add_child(enemy)

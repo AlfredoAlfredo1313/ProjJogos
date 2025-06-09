@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://bswoe5mcsk6e6"]
+
+[ext_resource type="Script" uid="uid://crdqfikfwso8k" path="res://WaveData.gd" id="1_rpsem"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_rpsem")
+n_simples = 3
+n_shooters = 0
+timer = -1.0
+metadata/_custom_type_script = "uid://crdqfikfwso8k"

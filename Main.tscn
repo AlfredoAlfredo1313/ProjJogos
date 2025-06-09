@@ -1,10 +1,36 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvdfsmvn6flws"]
+[gd_scene load_steps=11 format=3 uid="uid://bvdfsmvn6flws"]
 
 [ext_resource type="Script" uid="uid://bxqodkil6popv" path="res://Game.gd" id="1_lgr22"]
 [ext_resource type="Script" uid="uid://bfq3swfrk3l1j" path="res://UI/Label.gd" id="3_fos0i"]
 [ext_resource type="PackedScene" uid="uid://60okax2aajfx" path="res://Levels/Level1.tscn" id="4_3dxm6"]
 [ext_resource type="Script" uid="uid://chkscqfwwhu88" path="res://Levels/WaveAnim.gd" id="4_fos0i"]
+[ext_resource type="Script" uid="uid://crdqfikfwso8k" path="res://WaveData.gd" id="6_03owx"]
+[ext_resource type="PackedScene" uid="uid://d1a1emmopr4a5" path="res://Inimigos/EnemyShooter.tscn" id="6_lgr22"]
 [ext_resource type="FontFile" uid="uid://0mcwamf86rrp" path="res://Fonts/Xolonium-Regular.ttf" id="8_trn2v"]
+
+[sub_resource type="Resource" id="Resource_lgr22"]
+resource_local_to_scene = true
+script = ExtResource("6_03owx")
+n_simples = 3
+n_shooters = 0
+timer = -1.0
+metadata/_custom_type_script = "uid://crdqfikfwso8k"
+
+[sub_resource type="Resource" id="Resource_trn2v"]
+resource_local_to_scene = true
+script = ExtResource("6_03owx")
+n_simples = 3
+n_shooters = 6
+timer = -1.0
+metadata/_custom_type_script = "uid://crdqfikfwso8k"
+
+[sub_resource type="Resource" id="Resource_03owx"]
+resource_local_to_scene = true
+script = ExtResource("6_03owx")
+n_simples = 3
+n_shooters = 0
+timer = -1.0
+metadata/_custom_type_script = "uid://crdqfikfwso8k"
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_lgr22")
@@ -35,6 +61,8 @@ text = "Wave"
 script = ExtResource("4_fos0i")
 
 [node name="Level1" parent="." instance=ExtResource("4_3dxm6")]
+enemy_shooter = ExtResource("6_lgr22")
+waves = Array[ExtResource("6_03owx")]([SubResource("Resource_lgr22"), SubResource("Resource_trn2v"), SubResource("Resource_03owx")])
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 bus = &"BGM"

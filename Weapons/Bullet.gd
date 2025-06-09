@@ -35,8 +35,8 @@ func _on_area_entered(area: Area2D) -> void:
 	elif area.is_in_group("Destructable"):
 		var destruct_object = area as Destructable
 		var in_layer = false
-		if area.name == "Vida":
-			print(area.name, " ", damage_layers, " da bala", destruct_object.damage_layers, " do destructable")
+		#if area.name == "Vida":
+		#	print(area.name, " ", damage_layers, " da bala", destruct_object.damage_layers, " do destructable")
 		for layer in damage_layers:
 			if layer in destruct_object.damage_layers:
 				in_layer = true
