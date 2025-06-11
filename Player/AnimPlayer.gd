@@ -20,6 +20,13 @@ var timer:float = TIMER_CONST
 var knockback_velocity = Vector2.ZERO
 var knockback_timer = 0.0
 
+@onready var dodge_timer = $DodgeTimer
+@onready var dodge_recovery_timer = $DodgeRecoveryTimer
+@export var dodge_strengh = 900
+var dodge_velocity = Vector2.ZERO
+var mid_dodge = false
+var dodge_recovery = false
+
 func _ready() -> void:
 	vida.recebeu_dano.connect(
 		func(pos:Vector2):
@@ -28,7 +35,7 @@ func _ready() -> void:
 			apply_knockback(pos)
 	)
 	
-var last_dir_name := "down"  # Direção inicial padrão
+var last_dir_name := "down"  # Direção inicial padrãoaaaa
 func animate_side():
 	var dir = velocity.normalized()
 
@@ -61,42 +68,34 @@ func animate_side():
 	sprite.play(last_dir_name)
 		
 func get_side_input():
-	velocity.x = 0
-	var vel : Vector2
-	vel.x = Input.get_axis("left", "right")
-	vel.y = Input.get_axis("up", "down")
-	velocity = vel.normalized() * speed
-	
 	if Input.is_action_just_pressed("click"):
 		basic_gun.shoot()
-		lock_gun.shoot() 
+		lock_gun.shoot()
 
 func move_side(): 
 	move_and_slide()
 	get_side_input()
 	animate_side()
-
-func get_8way_input():
-	var input_direction = Input.get_vector("left", "right", "up", "down")
-	velocity = input_direction * speed
-	
-		
 	
 func aim(delta):
 	var dir_pointer = get_viewport().get_mouse_position()
-	
 
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO
 	aim(delta)
-	if knockback_timer <= 0:
+	if knockback_timer <= 0 and !mid_dodge:
 		input_vector.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 		input_vector.y = Input.get_action_strength("down") - Input.get_action_strength("up")
 		input_vector = input_vector.normalized()
-		velocity = input_vector * speed
-	else:
+		if Input.is_action_just_pressed("dodge") and !dodge_recovery:
+			apply_dodge(input_vector)
+		else:
+			velocity = input_vector * speed
+	elif !mid_dodge:
 		knockback_timer -= delta
 		velocity = knockback_velocity
+	else:
+		velocity = dodge_velocity
 	move_side()
 	timerIvencibility(delta)
 	
@@ -117,6 +116,13 @@ func apply_knockback(from_position: Vector2):
 	isInvincible = true
 	jump_sound.play()
 	
+func apply_dodge(direction: Vector2):
+	mid_dodge = true
+	dodge_recovery = true
+	dodge_velocity = direction * dodge_strengh
+	velocity = dodge_velocity
+	dodge_timer.start()
+	dodge_recovery_timer.start()
 	
 func timerIvencibility(delta):
 	if !isInvincible :
@@ -125,4 +131,9 @@ func timerIvencibility(delta):
 	if timer<=0 :
 		isInvincible = false
 		timer = TIMER_CONST
-			
+
+func _on_dodge_timer_timeout() -> void:
+	mid_dodge = false
+	
+func _on_dodge_recovery_timer_timeout() -> void:
+	dodge_recovery = false

@@ -162,7 +162,14 @@ tile_set = SubResource("TileSet_dl8mf")
 [node name="AnimPlayer" parent="." groups=["Player"] instance=ExtResource("1_ysn8j")]
 position = Vector2(600, 400)
 motion_mode = 1
+speed = 300.0
+knockback_strength = 300
+knockback_duration = 0.2
+jump_speed = -1000.0
+gravity = 2500.0
 bullet = ExtResource("2_6ll4n")
+isInvincible = false
+TIMER_CONST = 2.0
 
 [node name="Camera2D" type="Camera2D" parent="AnimPlayer"]
 position_smoothing_enabled = true
