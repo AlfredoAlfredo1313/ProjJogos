@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name EnemyShooter
 var player
 @export var speed = 80.0
 @export var orbit_radius: float = 100.0
@@ -14,22 +14,21 @@ func _process(delta):
 	var direction = (target_point - global_position).normalized()
 
 	# Movimento
-	#get_parent().position += direction * speed * delta
+	get_parent().position += direction * speed * delta
 
 	# Disparo
-	if x > 200:
-		basic_gun.enemy_shoot(player.global_position)
-		x = 0
-	x += 1
+	#if x > 200:
+		#basic_gun.enemy_shoot(player.global_position)
+		#x = 0
+	#x += 1
 
 	# Animação
 	if direction.length() > 0.1:  # Evita animação quando parado
 		var dir_name = get_direction_name(direction)
 		if sprite.animation != dir_name:
 			sprite.play(dir_name)
-			sprite.stop()
-		#if chapeu.animation != dir_name:
-			#chapeu.play(dir_name)	
+		if chapeu.animation != dir_name:
+			chapeu.play(dir_name)	
 	else:
 		sprite.stop()
 		chapeu.stop()
@@ -52,3 +51,6 @@ func get_direction_name(direction: Vector2) -> String:
 		return "right" if direction.x > 0 else "left"
 	else:
 		return "down" if direction.y > 0 else "up"
+	
+func setChapeu(x : bool):
+	$ChapeuAnimate.visible = x

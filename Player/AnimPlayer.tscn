@@ -769,6 +769,7 @@ shader_parameter/green = Vector3(0, 1, 0)
 shader_parameter/red = Vector3(1, 0, 0)
 
 [node name="AnimPlayer" type="CharacterBody2D"]
+z_index = 2
 z_as_relative = false
 y_sort_enabled = true
 collision_layer = 9

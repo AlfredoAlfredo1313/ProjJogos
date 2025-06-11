@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var enemy_shooter: PackedScene
+@export var enemy_walk: PackedScene
 @export var player: Node2D
 @export var waves : Array[CardData] = []
 var numero_inimigos
@@ -22,10 +23,10 @@ func start_wave():
 	for i in range(wave.n_shooters):  
 		spawn_enemy(enemy_shooter)
 	for i in range(wave.n_simples):  
-		spawn_enemy(enemy_shooter)
+		spawn_enemy(enemy_walk)
 	
-func spawn_enemy(enemy_type : PackedScene):
-	var enemy = enemy_shooter.instantiate()
+func spawn_enemy(tipo):
+	var enemy = tipo.instantiate()
 	var rand_x = randi_range(-200, 1000)
 	var rand_y = randi_range(-200, 1000)
 	enemy.global_position = Vector2(rand_x, rand_y)
