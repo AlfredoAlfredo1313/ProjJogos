@@ -4,11 +4,14 @@ extends Node2D
 @export var enemy_walk: PackedScene
 @export var player: Node2D
 @export var waves : Array[CardData] = []
+@export var tela_upgrade : Control
 var numero_inimigos
 var wave_atual = 0
 
 func _ready():
+	tela_upgrade.visible = false
 	start_wave()
+	
 
 func start_wave():
 	var s = "Wave " + str(wave_atual)
@@ -37,6 +40,14 @@ func spawn_enemy(tipo):
 func matou_inimigo():
 	numero_inimigos -= 1
 	if numero_inimigos <= 0:
-		wave_atual += 1
-		start_wave()
+		get_tree().paused = true
+		tela_upgrade.visible = true
+		
+func proxima_wave():
+	wave_atual += 1
+	start_wave()
 	
+func _on_button_pressed() -> void:
+	tela_upgrade.visible = false
+	get_tree().paused = false
+	proxima_wave()

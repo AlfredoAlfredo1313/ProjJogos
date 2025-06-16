@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://60okax2aajfx"]
+[gd_scene load_steps=14 format=4 uid="uid://60okax2aajfx"]
 
 [ext_resource type="Script" uid="uid://dd88ahvt4si8v" path="res://Levels/Level1.gd" id="1_05pb0"]
 [ext_resource type="Texture2D" uid="uid://b354favys571l" path="res://Tileset/tilemap.png" id="1_nutv8"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d1a1emmopr4a5" path="res://Inimigos/EnemyShooter.tscn" id="2_05pb0"]
 [ext_resource type="PackedScene" uid="uid://ciu6qrhn3f35e" path="res://Weapons/Bullet.tscn" id="2_6ll4n"]
 [ext_resource type="PackedScene" uid="uid://bhom5xnej108o" path="res://Inimigos/EnemyWalk.tscn" id="3_dl8mf"]
+[ext_resource type="FontFile" uid="uid://0mcwamf86rrp" path="res://Fonts/Xolonium-Regular.ttf" id="7_dl8mf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_05pb0"]
 texture = ExtResource("1_nutv8")
@@ -291,11 +292,12 @@ size = Vector2(1200, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xcayt"]
 size = Vector2(1600, 40)
 
-[node name="Level1" type="Node2D" node_paths=PackedStringArray("player")]
+[node name="Level1" type="Node2D" node_paths=PackedStringArray("player", "tela_upgrade")]
 script = ExtResource("1_05pb0")
 enemy_shooter = ExtResource("2_05pb0")
 enemy_walk = ExtResource("3_dl8mf")
 player = NodePath("AnimPlayer")
+tela_upgrade = NodePath("CanvasLayer/Control")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 scale = Vector2(3, 3)
@@ -341,3 +343,69 @@ shape = SubResource("RectangleShape2D_xcayt")
 position = Vector2(-600, -800)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_xcayt")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -363.0
+offset_top = -138.5
+offset_right = 363.0
+offset_bottom = 138.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("7_dl8mf")
+theme_override_font_sizes/font_size = 100
+text = "Select Upgrade
+"
+
+[node name="Button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -304.0
+offset_top = -98.0
+offset_right = -72.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 50
+text = "Escolha 1"
+
+[node name="Button2" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 104.0
+offset_top = -98.0
+offset_right = 336.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 50
+text = "Escolha 2"
+
+[connection signal="pressed" from="CanvasLayer/Control/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Button" to="AnimPlayer" method="_on_button_pressed"]

@@ -5,7 +5,7 @@ class_name Player
 @export var knockback_duration = 0.2
 @export var jump_speed := -1000.0
 @export var gravity := 2500.0
-
+@export var player_data : PlayerData
 @onready var sprite = $PlayerSprite
 @onready var jump_sound = $JumpSound
 @onready var basic_gun = $BasicGun as IGun
@@ -28,6 +28,7 @@ var mid_dodge = false
 var dodge_recovery = false
 
 func _ready() -> void:
+	vida.hp = player_data.hp
 	vida.recebeu_dano.connect(
 		func(pos:Vector2):
 			print("damageou")
@@ -137,3 +138,11 @@ func _on_dodge_timer_timeout() -> void:
 	
 func _on_dodge_recovery_timer_timeout() -> void:
 	dodge_recovery = false
+	
+func vida_aumenta():
+	vida.start_hp = 10
+	vida.hp = 10
+
+
+func _on_button_pressed() -> void:
+	vida_aumenta()
