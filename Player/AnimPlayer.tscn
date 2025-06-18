@@ -807,6 +807,7 @@ collision_mask = 3
 script = ExtResource("8_0qryd")
 morrer = false
 damage_layers = Array[int]([0])
+player_data = ExtResource("2_jh8iy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vida"]
 scale = Vector2(2.85, 2.85)

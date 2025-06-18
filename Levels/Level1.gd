@@ -9,6 +9,7 @@ var numero_inimigos
 var wave_atual = 0
 
 func _ready():
+	print("ready")
 	tela_upgrade.visible = false
 	start_wave()
 	

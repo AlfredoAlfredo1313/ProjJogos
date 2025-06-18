@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://60okax2aajfx"]
+[gd_scene load_steps=16 format=4 uid="uid://60okax2aajfx"]
 
 [ext_resource type="Script" uid="uid://dd88ahvt4si8v" path="res://Levels/Level1.gd" id="1_05pb0"]
 [ext_resource type="Texture2D" uid="uid://b354favys571l" path="res://Tileset/tilemap.png" id="1_nutv8"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://ciu6qrhn3f35e" path="res://Weapons/Bullet.tscn" id="2_6ll4n"]
 [ext_resource type="PackedScene" uid="uid://bhom5xnej108o" path="res://Inimigos/EnemyWalk.tscn" id="3_dl8mf"]
 [ext_resource type="FontFile" uid="uid://0mcwamf86rrp" path="res://Fonts/Xolonium-Regular.ttf" id="7_dl8mf"]
+[ext_resource type="Script" uid="uid://bbes5kvsuwsub" path="res://Levels/UpgradeScreen.gd" id="8_xcayt"]
+[ext_resource type="Resource" uid="uid://ppqafjbnaeym" path="res://Player/PlayerD.tres" id="9_5g41i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_05pb0"]
 texture = ExtResource("1_nutv8")
@@ -390,6 +392,8 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 50
 text = "Escolha 1"
+script = ExtResource("8_xcayt")
+player_data = ExtResource("9_5g41i")
 
 [node name="Button2" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -408,4 +412,4 @@ theme_override_font_sizes/font_size = 50
 text = "Escolha 2"
 
 [connection signal="pressed" from="CanvasLayer/Control/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/Button" to="AnimPlayer" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Button" to="CanvasLayer/Control/Button" method="_on_pressed"]
