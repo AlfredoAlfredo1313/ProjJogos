@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://ciu6qrhn3f35e"]
+[gd_scene load_steps=8 format=3 uid="uid://ciu6qrhn3f35e"]
 
 [ext_resource type="Script" uid="uid://civbftani0kqx" path="res://Weapons/Bullet.gd" id="1_js047"]
+[ext_resource type="Resource" uid="uid://ppqafjbnaeym" path="res://Player/PlayerD.tres" id="2_2qrei"]
 [ext_resource type="Texture2D" uid="uid://brulsnp8w44oj" path="res://Sprites/icon.svg" id="2_ft26q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_blvg2"]
@@ -63,6 +64,7 @@ z_index = 2
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_js047")
+player_data = ExtResource("2_2qrei")
 
 [node name="BulletSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)

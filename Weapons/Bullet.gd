@@ -2,6 +2,7 @@ extends Area2D
 class_name Bullet
 
 @export var speed = 500 
+@export var player_data : PlayerData
 var rot_angle : float
 var set_ready = false
 var damage_layers : Array[DamageLayers.damage_layers]
@@ -45,7 +46,7 @@ func _on_area_entered(area: Area2D) -> void:
 			return
 		if destruct_object.name == "Vida":
 			if area.get_parent().isInvincible: return
-		destruct_object.receive_damage(1, global_position)
+		destruct_object.receive_damage(player_data.dano, global_position)
 		queue_free()
 
 func set_bullet_color(color: Color) -> void:
