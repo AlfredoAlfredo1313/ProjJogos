@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bfq3swfrk3l1j" path="res://UI/Label.gd" id="3_fos0i"]
 [ext_resource type="PackedScene" uid="uid://60okax2aajfx" path="res://Levels/Level1.tscn" id="4_3dxm6"]
 [ext_resource type="Script" uid="uid://chkscqfwwhu88" path="res://Levels/WaveAnim.gd" id="4_fos0i"]
-[ext_resource type="Script" uid="uid://crdqfikfwso8k" path="res://Data/WaveData.gd" id="6_03owx"]
+[ext_resource type="Script" uid="uid://crdqfikfwso8k" path="res://WaveData.gd" id="6_03owx"]
 [ext_resource type="FontFile" uid="uid://0mcwamf86rrp" path="res://Fonts/Xolonium-Regular.ttf" id="8_trn2v"]
 
 [sub_resource type="Resource" id="Resource_3dxm6"]

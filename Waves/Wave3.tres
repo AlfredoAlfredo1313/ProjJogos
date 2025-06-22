@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://djbqplppf1t45"]
 
-[ext_resource type="Script" uid="uid://crdqfikfwso8k" path="res://Data/WaveData.gd" id="1_nor4x"]
+[ext_resource type="Script" uid="uid://crdqfikfwso8k" path="res://WaveData.gd" id="1_nor4x"]
 
 [resource]
 resource_local_to_scene = true

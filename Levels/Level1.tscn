@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ciu6qrhn3f35e" path="res://Weapons/Bullet.tscn" id="2_6ll4n"]
 [ext_resource type="PackedScene" uid="uid://bhom5xnej108o" path="res://Inimigos/EnemyWalk.tscn" id="3_dl8mf"]
 [ext_resource type="FontFile" uid="uid://0mcwamf86rrp" path="res://Fonts/Xolonium-Regular.ttf" id="7_dl8mf"]
-[ext_resource type="Script" uid="uid://bbes5kvsuwsub" path="res://Data/UpgradeScreen.gd" id="8_xcayt"]
+[ext_resource type="Script" uid="uid://bbes5kvsuwsub" path="res://Levels/UpgradeScreen.gd" id="8_xcayt"]
 [ext_resource type="Resource" uid="uid://ppqafjbnaeym" path="res://Player/PlayerD.tres" id="9_5g41i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_05pb0"]
@@ -308,7 +308,6 @@ tile_set = SubResource("TileSet_dl8mf")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="TileMapLayer"]
 z_index = 1
-texture_filter = 1
 tile_map_data = PackedByteArray("AAAKAAYAAAAEAAUAAAAOAAYAAAAEAAUAAAAOAAoAAAAEAAUAAAAKAAoAAAAEAAUAAAAKAAcAAAACAAUAAAAKAAgAAAACAAUAAAAKAAkAAAACAAUAAAALAAoAAAACAAUAAAAMAAoAAAACAAUAAAANAAoAAAACAAUAAAAOAAkAAAACAAUAAAAOAAgAAAACAAUAAAAOAAcAAAACAAUAAAANAAYAAAACAAUAAAAMAAYAAAACAAUAAAALAAYAAAACAAUAAAA=")
 tile_set = SubResource("TileSet_nutv8")
 
@@ -411,11 +410,6 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 50
 text = "Escolha 2"
-script = ExtResource("8_xcayt")
-player_data = ExtResource("9_5g41i")
-upgrade = 1
 
 [connection signal="pressed" from="CanvasLayer/Control/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/Button" to="CanvasLayer/Control/Button" method="_on_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/Button2" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/Button2" to="CanvasLayer/Control/Button2" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Button" to="CanvasLayer/Control/Button" method="_on_pressed"]

@@ -16,8 +16,8 @@ func _ready() -> void:
 
 func set_signal():
 	player_data.mod_health.connect(func(val):
-		max_hp += val
-		hp = max_hp	
+		max_hp = val
+		hp = val	
 		var tween = create_tween()
 		tween.tween_method(
 		func(value): 
@@ -47,3 +47,9 @@ func receive_damage(damage : int, pos : Vector2) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player and !body.isInvincible:
 		body.vida.receive_damage(1, global_position)
+		
+	
+	
+
+	
+	
