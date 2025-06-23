@@ -6,6 +6,7 @@ var player
 var target_point: Vector2 = Vector2.ZERO
 var offset : Vector2
 var x:int = 0
+@export var grave : PackedScene
 @onready var basic_gun = $BasicGun as IGun
 @onready var sprite = $AnimatedSprite2D
 @onready var chapeu = $ChapeuAnimate
@@ -52,3 +53,8 @@ func get_direction_name(direction: Vector2) -> String:
 		return "right" if direction.x > 0 else "left"
 	else:
 		return "down" if direction.y > 0 else "up"
+		
+func create_grave():
+	var grave_node : Node2D = grave.instantiate()
+	grave_node.global_position = global_position
+	get_parent().get_parent().add_child(grave_node)

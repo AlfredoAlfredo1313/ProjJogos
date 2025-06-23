@@ -5,6 +5,7 @@ extends Node2D
 @export var player: Node2D
 @export var waves : Array[CardData] = []
 @export var tela_upgrade : Control
+@onready var ysort_space = $YSortSpace
 var numero_inimigos
 var wave_atual = 0
 
@@ -12,7 +13,6 @@ func _ready():
 	tela_upgrade.visible = false
 	start_wave()
 	
-
 func start_wave():
 	var s = "Wave " + str(wave_atual)
 	get_tree().call_group("HUD", "anim", s)
@@ -33,7 +33,7 @@ func spawn_enemy(tipo):
 	enemy.global_position = Vector2(rand_x, rand_y)
 	enemy.get_child(0).player = player
 	(enemy as Destructable).morreu.connect(matou_inimigo)
-	add_child(enemy)
+	ysort_space.add_child(enemy)
 
 func matou_inimigo():
 	numero_inimigos -= 1

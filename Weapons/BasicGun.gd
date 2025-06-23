@@ -1,5 +1,6 @@
 class_name Basic_Gun extends IGun
 
+@export var is_enemy = false
 @export var bullet : PackedScene
 @export var player_data : PlayerData
 @onready var timer_tiro = $TimerTiro
@@ -8,7 +9,10 @@ var cool_down : bool = false
 func shoot():
 		if cool_down: 
 			return
-		timer_tiro.start(player_data.base_cadencia)
+		if !is_enemy:
+			timer_tiro.start(player_data.base_cadencia)
+		else:
+			timer_tiro.start(0.1)
 		cool_down = true
 		var b := bullet.instantiate()
 		b.position = global_position

@@ -3,25 +3,22 @@ class_name EnemyShooter
 var player
 @export var speed = 80.0
 @export var orbit_radius: float = 100.0
+@export var grave : PackedScene
 var target_point: Vector2 = Vector2.ZERO
 var offset : Vector2
 var x:int = 0
 @onready var basic_gun = $BasicGun as IGun
 @onready var sprite = $AnimatedSprite2D
+
 @onready var chapeu = $ChapeuAnimate
+@onready var soft_collision = $SoftCollision
+@export var soft_coll_strength = 200
+var unaltered_direction : Vector2 
 
 func _process(delta):
 	var direction = (target_point - global_position).normalized()
-
-	# Movimento
+	var animation_direction = (unaltered_direction - global_position).normalized()
 	get_parent().position += direction * speed * delta
-
-	# Disparo
-	#if x > 200:
-		#basic_gun.enemy_shoot(player.global_position)
-		#x = 0
-	#x += 1
-
 	# Animação
 	if direction.length() > 0.1:  # Evita animação quando parado
 		var dir_name = get_direction_name(direction)
@@ -44,7 +41,8 @@ func _on_timer_timeout() -> void:
 	var pos = get_parent().position
 	if pos.distance_to(player.global_position) >= pos.distance_to(player.global_position + offset):
 		offset = get_random_point_near_player(player.global_position, orbit_radius)
-	target_point = player.global_position + offset
+	unaltered_direction = player.global_position + offset
+	target_point = unaltered_direction + soft_collision.get_push_vector() * soft_coll_strength
 
 func get_direction_name(direction: Vector2) -> String:
 	if abs(direction.x) > abs(direction.y):
@@ -54,3 +52,9 @@ func get_direction_name(direction: Vector2) -> String:
 	
 func setChapeu(x : bool):
 	$ChapeuAnimate.visible = x
+	
+func create_grave():
+	var grave_node : Node2D = grave.instantiate()
+	grave_node.global_position = global_position
+	get_parent().get_parent().add_child(grave_node)
+	

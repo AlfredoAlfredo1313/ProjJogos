@@ -1,12 +1,14 @@
-[gd_scene load_steps=76 format=3 uid="uid://bhom5xnej108o"]
+[gd_scene load_steps=79 format=3 uid="uid://bhom5xnej108o"]
 
 [ext_resource type="Script" uid="uid://cbfdknisylbek" path="res://Common/Destructable.gd" id="1_pcxda"]
 [ext_resource type="Script" uid="uid://dkfi6038kg5fb" path="res://Inimigos/EnemyWalk.gd" id="2_5yb3g"]
+[ext_resource type="PackedScene" uid="uid://c3al47pjyc5s3" path="res://Inimigos/Grave.tscn" id="3_u2h0l"]
 [ext_resource type="Texture2D" uid="uid://y6o2ptmn8esj" path="res://Sprites/EnemyWalk/char_a_p1_0bas_humn_v01.png" id="3_ygdud"]
 [ext_resource type="Texture2D" uid="uid://d28802mmjr58j" path="res://Sprites/EnemyWalk/char_a_p1_5hat_pnty_v04.png" id="4_qkp6b"]
 [ext_resource type="Script" uid="uid://iljegkamfg0y" path="res://Weapons/BasicGun.gd" id="5_l18te"]
 [ext_resource type="PackedScene" uid="uid://ciu6qrhn3f35e" path="res://Weapons/Bullet.tscn" id="6_xbx78"]
 [ext_resource type="Shader" uid="uid://1wjb43dlttla" path="res://Common/HealthBar.gdshader" id="7_12juo"]
+[ext_resource type="Script" uid="uid://dqdi00mb5ev3l" path="res://Inimigos/SoftCollision.gd" id="7_u4c4f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fl83"]
 size = Vector2(50, 49)
@@ -505,6 +507,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_5yb3g"]
+radius = 39.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2p5hl"]
 resource_local_to_scene = true
 shader = ExtResource("7_12juo")
@@ -513,7 +518,7 @@ shader_parameter/green = Vector3(0, 1, 0)
 shader_parameter/red = Vector3(1, 0, 0)
 
 [node name="Destructable" type="Area2D" groups=["Destructable"]]
-z_as_relative = false
+y_sort_enabled = true
 collision_layer = 7
 collision_mask = 8
 script = ExtResource("1_pcxda")
@@ -523,6 +528,7 @@ damage_layers = Array[int]([1])
 position = Vector2(-2, 0.5)
 shape = SubResource("RectangleShape2D_7fl83")
 script = ExtResource("2_5yb3g")
+grave = ExtResource("3_u2h0l")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
 y_sort_enabled = true
@@ -546,6 +552,15 @@ script = ExtResource("5_l18te")
 bullet = ExtResource("6_xbx78")
 damage_layer = Array[int]([0, 2])
 
+[node name="SoftCollision" type="Area2D" parent="CollisionShape2D"]
+collision_layer = 64
+collision_mask = 64
+script = ExtResource("7_u4c4f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/SoftCollision"]
+position = Vector2(0, -5.535)
+shape = SubResource("CircleShape2D_5yb3g")
+
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 100
 z_as_relative = false
@@ -562,4 +577,5 @@ autostart = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="morreu" from="." to="CollisionShape2D" method="create_grave"]
 [connection signal="timeout" from="Timer" to="CollisionShape2D" method="_on_timer_timeout"]

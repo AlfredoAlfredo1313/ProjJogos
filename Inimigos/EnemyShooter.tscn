@@ -1,7 +1,8 @@
-[gd_scene load_steps=76 format=3 uid="uid://d1a1emmopr4a5"]
+[gd_scene load_steps=77 format=3 uid="uid://d1a1emmopr4a5"]
 
 [ext_resource type="Script" uid="uid://cbfdknisylbek" path="res://Common/Destructable.gd" id="1_3yf0x"]
 [ext_resource type="Script" uid="uid://cohaxtuojrepf" path="res://Inimigos/EnemyShooter.gd" id="2_y4bpy"]
+[ext_resource type="PackedScene" uid="uid://c3al47pjyc5s3" path="res://Inimigos/Grave.tscn" id="3_1k2nk"]
 [ext_resource type="Texture2D" uid="uid://y6o2ptmn8esj" path="res://Sprites/EnemyWalk/char_a_p1_0bas_humn_v01.png" id="3_amkkg"]
 [ext_resource type="Script" uid="uid://iljegkamfg0y" path="res://Weapons/BasicGun.gd" id="4_1k2nk"]
 [ext_resource type="Shader" uid="uid://1wjb43dlttla" path="res://Common/HealthBar.gdshader" id="4_bxbd2"]
@@ -523,6 +524,7 @@ damage_layers = Array[int]([1])
 position = Vector2(-2, 0.5)
 shape = SubResource("RectangleShape2D_7fl83")
 script = ExtResource("2_y4bpy")
+grave = ExtResource("3_1k2nk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
 y_sort_enabled = true
@@ -562,4 +564,5 @@ autostart = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="morreu" from="." to="CollisionShape2D" method="create_grave"]
 [connection signal="timeout" from="Timer" to="CollisionShape2D" method="_on_timer_timeout"]

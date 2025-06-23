@@ -25,6 +25,7 @@ signal mod_health(hp:int)
 signal mod_velo(velo:float)
 signal mod_cadence(cadence:float)
 signal mod_dano(dano:int)
+signal heal(heal:int)
 
 func send_upgrade(upgrade : Upgrades):
 	match upgrade:
