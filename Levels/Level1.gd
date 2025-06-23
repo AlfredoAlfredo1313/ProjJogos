@@ -9,7 +9,6 @@ var numero_inimigos
 var wave_atual = 0
 
 func _ready():
-	print("ready")
 	tela_upgrade.visible = false
 	start_wave()
 	
@@ -18,12 +17,10 @@ func start_wave():
 	var s = "Wave " + str(wave_atual)
 	get_tree().call_group("HUD", "anim", s)
 	if waves.size() <= wave_atual:
-		print("venceu")
 		return
 	var wave = waves[wave_atual]
 	numero_inimigos = wave.n_shooters + wave.n_simples
 	var ss = "numero total " + str(numero_inimigos)
-	print(ss)
 	for i in range(wave.n_shooters):  
 		spawn_enemy(enemy_shooter)
 	for i in range(wave.n_simples):  
@@ -42,6 +39,7 @@ func matou_inimigo():
 	numero_inimigos -= 1
 	if numero_inimigos <= 0:
 		get_tree().paused = true
+		tela_upgrade.assign_upgrades()
 		tela_upgrade.visible = true
 		
 func proxima_wave():

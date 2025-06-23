@@ -770,15 +770,13 @@ shader_parameter/green = Vector3(0, 1, 0)
 shader_parameter/red = Vector3(1, 0, 0)
 
 [node name="AnimPlayer" type="CharacterBody2D"]
-z_index = 2
-z_as_relative = false
-y_sort_enabled = true
 collision_layer = 9
 collision_mask = 9
 script = ExtResource("1_kpjcp")
 player_data = ExtResource("2_jh8iy")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 texture_filter = 1
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_efikj")
@@ -799,7 +797,11 @@ bus = &"SFX"
 [node name="BasicGun" type="Node2D" parent="."]
 script = ExtResource("4_3q168")
 bullet = ExtResource("5_n20f4")
+player_data = ExtResource("2_jh8iy")
 damage_layer = Array[int]([1, 2])
+
+[node name="TimerTiro" type="Timer" parent="BasicGun"]
+process_callback = 0
 
 [node name="Vida" type="Area2D" parent="." groups=["Destructable"]]
 collision_layer = 3
@@ -814,6 +816,8 @@ scale = Vector2(2.85, 2.85)
 shape = SubResource("CircleShape2D_n20f4")
 
 [node name="ColorRect" type="ColorRect" parent="Vida"]
+z_index = 100
+z_as_relative = false
 material = SubResource("ShaderMaterial_p75ea")
 offset_left = -55.0
 offset_top = -55.0
@@ -837,7 +841,17 @@ wait_time = 0.3
 process_callback = 0
 wait_time = 0.7
 
+[node name="InvTimer" type="Timer" parent="."]
+process_callback = 0
+
+[node name="KnBTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.2
+
+[connection signal="timeout" from="BasicGun/TimerTiro" to="BasicGun" method="reset_cooldown"]
 [connection signal="area_entered" from="Vida" to="LockOnGun" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Vida" to="LockOnGun" method="_on_area_2d_area_exited"]
 [connection signal="timeout" from="DodgeTimer" to="." method="_on_dodge_timer_timeout"]
 [connection signal="timeout" from="DodgeRecoveryTimer" to="." method="_on_dodge_recovery_timer_timeout"]
+[connection signal="timeout" from="InvTimer" to="." method="_reset_invincibility"]
+[connection signal="timeout" from="KnBTimer" to="." method="_reset_knockback"]

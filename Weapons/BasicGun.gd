@@ -1,8 +1,15 @@
 class_name Basic_Gun extends IGun
 
 @export var bullet : PackedScene
+@export var player_data : PlayerData
+@onready var timer_tiro = $TimerTiro
+var cool_down : bool = false
 
 func shoot():
+		if cool_down: 
+			return
+		timer_tiro.start(player_data.base_cadencia)
+		cool_down = true
 		var b := bullet.instantiate()
 		b.position = global_position
 		owner.owner.add_child(b)
@@ -23,4 +30,7 @@ func enemy_shoot(target):
 		var pointer_vector = (target - global_position).normalized()
 		bullet.set_rot(pointer_vector.angle())
 		bullet.set_bullet_color(Color(1, 0, 0))
+		
+func reset_cooldown():
+	cool_down = false
 	

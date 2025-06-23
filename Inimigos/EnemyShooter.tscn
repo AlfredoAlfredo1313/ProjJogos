@@ -513,9 +513,7 @@ shader_parameter/green = Vector3(0, 1, 0)
 shader_parameter/red = Vector3(1, 0, 0)
 
 [node name="Destructable" type="Area2D" groups=["Destructable"]]
-z_index = 2
 z_as_relative = false
-y_sort_enabled = true
 collision_layer = 7
 collision_mask = 8
 script = ExtResource("1_3yf0x")
@@ -527,6 +525,7 @@ shape = SubResource("RectangleShape2D_7fl83")
 script = ExtResource("2_y4bpy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
+y_sort_enabled = true
 texture_filter = 1
 position = Vector2(2, -0.5)
 scale = Vector2(2.67, 2.67)
@@ -534,6 +533,8 @@ sprite_frames = SubResource("SpriteFrames_46lft")
 animation = &"left"
 
 [node name="ChapeuAnimate" type="AnimatedSprite2D" parent="CollisionShape2D"]
+z_as_relative = false
+y_sort_enabled = true
 texture_filter = 1
 position = Vector2(2, -0.5)
 scale = Vector2(2.67, 2.67)
@@ -546,6 +547,8 @@ bullet = ExtResource("5_hh0yd")
 damage_layer = Array[int]([0, 2])
 
 [node name="ColorRect" type="ColorRect" parent="."]
+z_index = 100
+z_as_relative = false
 material = SubResource("ShaderMaterial_2p5hl")
 offset_left = -55.0
 offset_top = -77.0
