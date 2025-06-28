@@ -1,8 +1,10 @@
 extends Control
+@onready var game_over_sound = $GameOverSound
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	game_over_sound.play()
 	pass # Replace with function body.
 
 

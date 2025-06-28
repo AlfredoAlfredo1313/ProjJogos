@@ -8,6 +8,7 @@ class_name Player
 @export var player_data : PlayerData
 @onready var sprite = $PlayerSprite
 @onready var jump_sound = $JumpSound
+@onready var pain_sound = $PainSound
 @onready var basic_gun = $BasicGun as IGun
 @onready var lock_gun = $LockOnGun as IGun
 @onready var vida = $Vida
@@ -111,7 +112,7 @@ func _physics_process(delta):
 	
 	if vida.hp <= 0:
 		get_tree().change_scene_to_file("res://Levels/GameOver.tscn")
-
+		
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	get_tree().change_scene_to_file("res://Levels/GameOver.tscn")
 	pass # Replace with function body.
@@ -124,11 +125,12 @@ func apply_knockback(from_position: Vector2):
 	mid_knockback = true
 	isInvincible = true
 	sprite.pisca_player()
-	jump_sound.play()
+	pain_sound.play()
 	#$KnBTimer.start()
 	#$InvTimer.start()
 	
 func apply_dodge(direction: Vector2):
+	jump_sound.play()
 	mid_dodge = true
 	dodge_recovery = true
 	isInvincible = true

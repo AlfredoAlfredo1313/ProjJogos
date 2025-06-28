@@ -15,6 +15,7 @@ func _ready() -> void:
 	
 func set_rot(rot_angle : float) -> void:
 	self.rot_angle = rot_angle
+	rotation = rot_angle  # ← gira visualmente a bala
 	set_ready = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

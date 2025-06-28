@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://btl7jj160y1ne"]
+[gd_scene load_steps=4 format=3 uid="uid://btl7jj160y1ne"]
 
 [ext_resource type="Script" uid="uid://b1hfklwb4crve" path="res://Levels/GameOver.gd" id="1_l8e1j"]
 [ext_resource type="FontFile" uid="uid://0mcwamf86rrp" path="res://Fonts/Xolonium-Regular.ttf" id="1_m8yab"]
+[ext_resource type="AudioStream" uid="uid://buc83hutf5ifi" path="res://SFX/game-over.mp3" id="3_jdanw"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -58,5 +59,10 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_m8yab")
 theme_override_font_sizes/font_size = 50
 text = "Restart"
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jdanw")
+volume_db = -6.0
+bus = &"SFX"
 
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]

@@ -39,6 +39,11 @@ func receive_damage(damage : int, pos : Vector2) -> void:
 	);
 	tween.finished.connect(func(): 
 		if(hp <= 0 && morrer):
+			var path := scene_file_path
+			if path.contains("Grave"):
+				SoundManager.play_enemy_death("grave")
+			else:
+				SoundManager.play_enemy_death("enemy")
 			morreu.emit()
 			queue_free()
 			get_tree().call_group("HUD", "update_score")

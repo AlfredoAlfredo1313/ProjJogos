@@ -1,4 +1,4 @@
-[gd_scene load_steps=176 format=3 uid="uid://d3equlu2k18pa"]
+[gd_scene load_steps=178 format=3 uid="uid://d3equlu2k18pa"]
 
 [ext_resource type="Script" uid="uid://bkv0gni4voe8x" path="res://Player/AnimPlayer.gd" id="1_kpjcp"]
 [ext_resource type="Resource" uid="uid://ppqafjbnaeym" path="res://Player/PlayerD.tres" id="2_jh8iy"]
@@ -27,6 +27,8 @@
 [ext_resource type="Script" uid="uid://cbfdknisylbek" path="res://Common/Destructable.gd" id="8_0qryd"]
 [ext_resource type="Texture2D" uid="uid://dyeyfeywqbtvo" path="res://Sprites/PlayerWalk/idle_up.png" id="8_2k3gs"]
 [ext_resource type="Texture2D" uid="uid://ciqlbmce3lmvp" path="res://Sprites/PlayerWalk/Dash_up.png" id="8_gdvcd"]
+[ext_resource type="AudioStream" uid="uid://ba068iiopk1ax" path="res://SFX/pain.ogg" id="23_2b2rn"]
+[ext_resource type="AudioStream" uid="uid://drut2ixmd8hj7" path="res://SFX/gun-shot.mp3" id="24_l1x61"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lm7ac"]
 atlas = ExtResource("3_36dty")
@@ -1166,11 +1168,21 @@ stream = ExtResource("3_2n4i2")
 volume_db = -6.0
 bus = &"SFX"
 
+[node name="PainSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_2b2rn")
+volume_db = -6.0
+bus = &"SFX"
+
 [node name="BasicGun" type="Node2D" parent="."]
 script = ExtResource("4_3q168")
 bullet = ExtResource("5_n20f4")
 player_data = ExtResource("2_jh8iy")
 damage_layer = Array[int]([1, 2])
+
+[node name="GunSound" type="AudioStreamPlayer" parent="BasicGun"]
+stream = ExtResource("24_l1x61")
+volume_db = -6.0
+bus = &"SFX"
 
 [node name="TimerTiro" type="Timer" parent="BasicGun"]
 process_callback = 0

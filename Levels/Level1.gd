@@ -6,6 +6,7 @@ extends Node2D
 @export var waves : Array[CardData] = []
 @export var tela_upgrade : Control
 @onready var ysort_space = $YSortSpace
+@onready var upgrade_sound = $UpgradeSound
 var numero_inimigos
 var wave_atual = 0
 
@@ -41,6 +42,7 @@ func matou_inimigo():
 		get_tree().paused = true
 		tela_upgrade.assign_upgrades()
 		tela_upgrade.visible = true
+		upgrade_sound.play()
 		
 func proxima_wave():
 	wave_atual += 1
@@ -48,5 +50,6 @@ func proxima_wave():
 	
 func _on_button_pressed() -> void:
 	tela_upgrade.visible = false
+	upgrade_sound.stop()
 	get_tree().paused = false
 	proxima_wave()

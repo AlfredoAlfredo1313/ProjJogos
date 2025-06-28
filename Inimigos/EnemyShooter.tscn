@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://d1a1emmopr4a5"]
+[gd_scene load_steps=78 format=3 uid="uid://d1a1emmopr4a5"]
 
 [ext_resource type="Script" uid="uid://cbfdknisylbek" path="res://Common/Destructable.gd" id="1_3yf0x"]
 [ext_resource type="Script" uid="uid://cohaxtuojrepf" path="res://Inimigos/EnemyShooter.gd" id="2_y4bpy"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" uid="uid://1wjb43dlttla" path="res://Common/HealthBar.gdshader" id="4_bxbd2"]
 [ext_resource type="Texture2D" uid="uid://d28802mmjr58j" path="res://Sprites/EnemyWalk/char_a_p1_5hat_pnty_v04.png" id="4_hh0yd"]
 [ext_resource type="PackedScene" uid="uid://ciu6qrhn3f35e" path="res://Weapons/Bullet.tscn" id="5_hh0yd"]
+[ext_resource type="AudioStream" uid="uid://dcs7fwjq162kj" path="res://SFX/enemy-death.mp3" id="9_hh0yd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fl83"]
 size = Vector2(50, 49)
@@ -561,6 +562,9 @@ color = Color(0, 0, 0, 1)
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
 autostart = true
+
+[node name="EnemyDeathSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_hh0yd")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -4,6 +4,7 @@ class_name Basic_Gun extends IGun
 @export var bullet : PackedScene
 @export var player_data : PlayerData
 @onready var timer_tiro = $TimerTiro
+@onready var gun_sound = $GunSound
 var cool_down : bool = false
 
 func shoot():
@@ -22,6 +23,7 @@ func shoot():
 		bullet.set_rot(rotation)
 		var pointer_vector = (get_global_mouse_position() - global_position).normalized()
 		bullet.set_rot(pointer_vector.angle())
+		gun_sound.play()
 
 func enemy_shoot(target):
 		var b := bullet.instantiate()

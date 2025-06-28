@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://xpjcdkns1wa0"]
+
+[ext_resource type="Script" uid="uid://ckjrxm3vf0dhc" path="res://Inimigos/SoundManager.gd" id="1_37lbx"]
+[ext_resource type="AudioStream" uid="uid://dcs7fwjq162kj" path="res://SFX/enemy-death.mp3" id="1_qgywh"]
+[ext_resource type="AudioStream" uid="uid://byxtepm1mchhn" path="res://SFX/cross_destruction.mp3" id="2_k25hr"]
+
+[node name="SoundManager" type="Node"]
+script = ExtResource("1_37lbx")
+
+[node name="GraveDeathSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_k25hr")
+volume_db = 2.476
+
+[node name="EnemyDeathSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_qgywh")
