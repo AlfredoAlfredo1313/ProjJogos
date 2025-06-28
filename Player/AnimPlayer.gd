@@ -25,6 +25,7 @@ var dodge_velocity = Vector2.ZERO
 var mid_dodge = false
 var dodge_recovery = false
 var mid_knockback = false
+var dodge_dir_name := ""
 
 func _ready() -> void:
 	vida.hp = player_data.base_hp
@@ -40,6 +41,9 @@ func _ready() -> void:
 var last_dir_name := "down"  # Direção inicial padrãoaaaa
 
 func animate_side():
+	if mid_dodge:
+		sprite.play("dash_" + dodge_dir_name)
+		return
 	var dir = velocity.normalized()
 
 	# Jogador parado
@@ -133,7 +137,35 @@ func apply_dodge(direction: Vector2):
 	$InvTimer.start(player_data.base_dodge_i)
 	$DodgeTimer.start()
 	$DodgeRecoveryTimer.start()
-		
+	# Salva a direção para animação
+	dodge_dir_name = get_direction_name(direction)
+	sprite.play("dash_" + dodge_dir_name)
+	print("dash_" + dodge_dir_name)
+	
+func get_direction_name(dir: Vector2) -> String:
+	if dir == Vector2.ZERO:
+		return last_dir_name
+
+	if dir.y < -0.5:
+		if dir.x < -0.5:
+			return "left_up"
+		elif dir.x > 0.5:
+			return "right_up"
+		else:
+			return "up"
+	elif dir.y > 0.5:
+		if dir.x < -0.5:
+			return "left_down"
+		elif dir.x > 0.5:
+			return "right_down"
+		else:
+			return "down" 
+	else:
+		if dir.x < 0:
+			return "left_down"
+		else:
+			return "right_down"
+
 func _reset_invincibility():
 	isInvincible = false
 
