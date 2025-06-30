@@ -55,6 +55,9 @@ func get_direction_name(direction: Vector2) -> String:
 		return "down" if direction.y > 0 else "up"
 		
 func create_grave():
+	var spawn_g = randf()
+	if spawn_g < 0.6:
+		return
 	var grave_node : Node2D = grave.instantiate()
 	grave_node.global_position = global_position
 	get_parent().get_parent().add_child(grave_node)

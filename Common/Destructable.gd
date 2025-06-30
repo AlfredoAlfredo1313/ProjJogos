@@ -25,10 +25,12 @@ func set_signal():
 			mat.get_shader_parameter("hp_per"),
 			float(hp)/float(max_hp),0.5	);
 	)
+	player_data.heal.connect(func(val):receive_damage(-1, Vector2.ZERO))
 	
 func receive_damage(damage : int, pos : Vector2) -> void:
 	recebeu_dano.emit(pos)
 	hp -= damage
+	hp = min(max_hp, hp)
 	var tween = create_tween()
 	tween.tween_method(
 		func(value): 
@@ -52,3 +54,6 @@ func receive_damage(damage : int, pos : Vector2) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player and !body.isInvincible:
 		body.vida.receive_damage(1, global_position)
+
+func grave_morreu():
+	player_data.heal.emit(-1)

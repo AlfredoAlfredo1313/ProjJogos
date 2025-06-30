@@ -64,4 +64,7 @@ func get_available_upgrades() -> Array[int]:
 		av_ups.append(up_disho[k])
 	return av_ups
 	
+func heal_player():
+	pass
+	
 	

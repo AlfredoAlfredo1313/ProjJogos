@@ -184,3 +184,5 @@ texture_filter = 1
 scale = Vector2(3, 3)
 tile_map_data = PackedByteArray(0, 0, 255, 255, 255, 255, 0, 0, 4, 0, 5, 0, 0, 0)
 tile_set = SubResource("TileSet_qpvv7")
+
+[connection signal="morreu" from="." to="." method="grave_morreu"]
